@@ -18,7 +18,7 @@ genai.configure(api_key=GEMINI_API_KEY)
 model = genai.GenerativeModel('gemini-pro')
 
 # Generate text for phishing email
-name="John"
+name = "John"
 surname="Doe"
 email="john.doe@example.com"
 business_unit="Sales"
