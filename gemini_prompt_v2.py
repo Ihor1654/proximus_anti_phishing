@@ -46,7 +46,9 @@ phishing_themes = [
             "top_k": 64,
             "max_output_tokens": 8192,
             "response_mime_type": "text/plain"
+
         }"""
+
 # Randomly select a phishing theme for the simulation
 import random
 random_pick = random.choice(phishing_themes)
@@ -68,6 +70,7 @@ genai.configure(api_key=GEMINI_API_KEY)
 #import the image
 img=PIL.Image.open("microsoft_email_example.png")   #replace with the image you want to use    
 
+
 # Create the model using the configuration settings that fit with the campaign and the phishing theme
 
 model = genai.GenerativeModel(
@@ -86,11 +89,14 @@ team_name="CyberSecurity"
 #Formulate a prompt
 example_email = open(file="microsoft_email_example.txt", encoding="utf8").read().strip()
 
+
 prompt_body=f'''Write an email from {random_pick["Created By"]} to {name} {surname} from the {team_name} team on the following theme: {random_pick["Reason"]}.
 He will have to click on this link : {random_pick["Fake Link"]}. Only write the body of this email.'''
 
 
+
 prompt_engineered=f"Example email:/n{example_email}/n---/n{prompt_body}/n---/n{random_pick["Output Composition"]}"
+
 
 print("Engineered prompt:",prompt_engineered)
 
@@ -102,3 +108,4 @@ print(response.text)
 # Save the output to a file
 with open("phishing_email.html", "w", encoding="utf8") as file:
     file.write(response.text)
+
