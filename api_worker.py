@@ -4,12 +4,17 @@ from dotenv import load_dotenv
 import os 
 import csv
 import urllib3
+
 import db_worker as db
+
 
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+
 class Api_Worker:
+
     def __init__(self,campaign_name:str):
         load_dotenv()
         self.api_key = os.getenv('API_KEY')
@@ -81,6 +86,13 @@ class Api_Worker:
         html= self.db_worker.get_record(db.Theme,id=self.campaign.theme_id).landing_page
         )
         self.page = self.api.pages.post(self.page)
+        
+    def create_Champaign(self):
+        campaign = Campaign(
+            name=f'Example Campaign#{self.Campaign_counter+self.id}', groups=self.groups, page=self.page,
+                template=self.template, smtp=self.smtp)
+        self.campaign = self.api.campaigns.post(campaign)
+
 
     def create_smtp(self):
         self.smtp = SMTP(
