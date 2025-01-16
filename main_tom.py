@@ -24,10 +24,10 @@ phishing_themes = [
      "Created By": "Bernard Bandit",    
      "System Instructions":
         "You are a professional email campaign expert. You write emails in concise language, fluent English and with the tone of a large corporation. You are neutral in your language, but your goal is to make the customer click on a link to buy a product. You generate output as an email in html format. You recreate the layout of the output to mimick the uploaded image file. You search for the logo found in the uploaded image, and include a working link of the logo in the generated output. You replace the subscription ID in the image with a random subscriptionID in the same format.",
-     "Example Image":"MS_Azure.PNG",
+     "Example Image":"data/static/MS_Azure.PNG",
      "Output Composition":
         "The output is an html formatted email. The email mimicks the image in the uploaded file. The output contains the logo found in the uploaded image. The logo is not retrieved from the website https://upload.wikimedia.org/wikipedia/commons.",
-    "Grounding Text":"MS_Azure_original_email.html",
+    "Grounding Text":"data/static/MS_Azure_original_email.html",
     "Generation Config": {
         "temperature": 0.7,
         "top_p": 0.95,
