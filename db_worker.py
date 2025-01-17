@@ -53,7 +53,7 @@ class Theme(Base):
     __tablename__ = 'themes'
 
     id = Column(Integer, primary_key=True)
-    name = Column(String)
+    name = Column(String,unique=True)
     landing_page = Column(String)
     system_instruction = Column(String)
     structur_instruction = Column(String)
@@ -79,7 +79,7 @@ class Campaign(Base):
     __tablename__ = 'campaigns'
 
     id = Column(Integer, primary_key=True)
-    name = Column(String,nullable=False)
+    name = Column(String,nullable=False,unique=True)
     group_id = Column(Integer, ForeignKey('groups.group_id'))
     theme_id = Column(Integer, ForeignKey('themes.id'))
 
@@ -128,6 +128,9 @@ class DBWorker:
     def get_record(self, session, model_class, **filters):
         return session.query(model_class).filter_by(**filters).first()
     
+    @db_operation("get")
+    def get_records(self, session, model_class, **filters):
+        return session.query(model_class).filter_by(**filters).all()
     
     @db_operation("add")
     def add_user_to_group(self, session, user_id, group_id):
