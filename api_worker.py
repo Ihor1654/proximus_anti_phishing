@@ -1,174 +1,107 @@
 from gophish import Gophish
+
 from gophish.models import *
+from time import sleep
 from dotenv import load_dotenv
 import os 
 import csv
 import urllib3
 
+from template_creator import TemplateCreator
+
 import db_worker as db
+load_dotenv()
+
 
 
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+
+
 
 class Api_Worker:
 
-    def __init__(self,campaign_name:str):
-        load_dotenv()
+    def __init__(self,):
+
         self.api_key = os.getenv('API_KEY')
         self.api = Gophish(self.api_key,host="https://127.0.0.1:3333",verify = False)
-        self.targets = []
-        self.groups = []
-        self.group_id = None
-        self.page = None
-        self.smtp = None
-        self.url = 'www.google.com' 
-        self.template = None   
-        self.campaign = None
-        self.campaign_name = campaign_name
-        self.Campaign_counter = 0  
-        self.template_counter = 0
-        # self.id = int(input('id')) 
         self.app_pass = os.getenv('APP_PASS')
         self.mail = os.getenv('EMAIL')
+        self.url = 'www.google.com' 
+        self.template = None   
         self.db_worker = db.DBWorker()
-        self.create_campaign_db()
-        self.create_smtp()
-        self.create_page()
-
-    
-
-    def create_group_db(self):
-        group = self.db_worker.add_record(db.Group,name = f'Group for {self.campaign_name}')
-        self.group_id = group.group_id
-        return group.group_id
-    
-    def create_config(self):
-        config = self.db_worker.add_record(db.GenerativeConfig, 
-                                             temperature=25, 
-                                             p=1.25, 
-                                             k=10, 
-                                             max_output_tokens=1000, 
-                                             response_mime_type="application/json")
-        return config.id
-    
-    
-    def create_theme(self):
-        theme = self.db_worker.add_record(db.Theme, 
-                                 name="Theme_name", 
-                                 landing_page="<html><body><h1>This is a phishing page</h1></body></html>", 
-                                 system_instruction="System instructions here", 
-                                 structur_instruction="Structure instructions here", 
-                                 prompt_template="Prompt template text", 
-                                 subject="New subject", 
-                                 config_id=self.create_config())
-        return theme.id
-    
-    def reset_properties(self):
-        self.campaign = None
-        self.groups = []
-        self.template = None
-        self.targets = []
-        print(self.campaign )
-        print(self.groups)
-        print(self.template)
-
-    def create_campaign_db(self):
-        campaign = self.db_worker.add_record(db.Campaign,name = self.campaign_name,group_id = self.create_group_db(),theme_id = self.create_theme())
-        self.campaign = campaign
-    
-    def create_page(self):
-        #Inside we gona get the generative html tamplate
-        self.page = Page(
-        name=f"Example Landing Page for {self.campaign_name}",
-        html= self.db_worker.get_record(db.Theme,id=self.campaign.theme_id).landing_page
-        )
-        self.page = self.api.pages.post(self.page)
         
-    def create_Champaign(self):
-        campaign = Campaign(
-            name=f'Example Campaign#{self.Campaign_counter+self.id}', groups=self.groups, page=self.page,
-                template=self.template, smtp=self.smtp)
-        self.campaign = self.api.campaigns.post(campaign)
+    def post_tamplate_for_user(self,user_id,theme_id:int=1):
+        try:
+            template = self.db_worker.get_record(db.Template,user_id=user_id)
+            theme = self.db_worker.get_record(db.Theme,id=theme_id)
+            self.template = Template(name=f"Example Template for User {user_id}",
+                        subject=theme.subject,
+                        html=template.html_template)   
+            self.template = self.api.templates.post(self.template)
+        except Exception as e:
+            print('Template is not founded')
 
 
-    def create_smtp(self):
-        self.smtp = SMTP(
-            name=f"Example SMTP {self.campaign_name}",
+    def get_tamplate_by_id(self,template_id):
+        template = self.api.templates.get(template_id=template_id)
+        return template
+
+    def delete_template_by_id(self,template_ids:list):
+        for template_id in template_ids:
+            self.api.templates.delete(template_id)
+
+
+    def post_smtp_for_campaign(self,campaing_id):
+        smtp = SMTP(
+            name=f"SMTP  for Campaign#{campaing_id}",
             host="smtp.gmail.com",
             interface_type="SMTP",
             from_address = self.mail,
             username = self.mail,      
             password = self.app_pass,
             port=587,
-            tls=True 
-            
+            tls=True   
         )
-        self.smtp = self.api.smtp.post(self.smtp)
+        self.api.smtp.post(smtp)
 
-    
-    
-    def load_targets_from_csv(self, file_path="test_targets.csv"):
-        try:
-            with open(file_path, mode='r', encoding='utf-8') as file:
-                csv_reader = csv.DictReader(file) 
-                for row in csv_reader:
-                    first_name = row.get('first_name')
-                    last_name = row.get('last_name')
-                    email = row.get('email')
-                    company = row.get('company')
-                    business_unit = row.get('business_unit')
-                    team = row.get('team')
-                    role = row.get('role')
-                    linkedin = row.get('linkedin')
-                    if first_name and last_name and email:
-                        user_db = self.db_worker.add_record(db.User, firstname=first_name, lastname=last_name, company=company,
-                                business_unit=business_unit, team=team, role=role,
-                                email=email, linkedin=linkedin)
-                        user_gp = User(first_name=first_name, last_name=last_name, email=email)
-                        self.targets.append(user_gp)
+    def post_group(self,campaing_id,user_ids:list):
+        target_list = []
+        campaign_name = self.db_worker.get_record(db.Campaign,id=campaing_id).name
+        match len(user_ids):
+            case 1:
+                name = f"Group for {campaign_name}_{user_ids[0]}" 
+            case _:
+                name = f'Group for {campaign_name}'
+        for user_id in user_ids:
+            user = self.db_worker.get_record(db.User,id=user_id)
+            user_gp = User(first_name=user.firstname,last_name=user.lastname,email=user.email,position=user.role)
+            target_list.append(user_gp)
+        group = Group(name=name,targets=target_list)
+        self.api.groups.post(group)
 
-                        self.db_worker.add_user_to_group(user_id=user_db.id,group_id=self.group_id)
-                        self.create_group(user_db.id)
-                        self.create_tamplate(user_db.id)
-                        self.create_Champaign(user_db.id)
-                        self.reset_properties()
-                        
-                    else:
-                        print(f"String  {row} is missing ")
-            print(f"{len(self.targets)} Successfully loaded from {file_path}")
-        except FileNotFoundError:
-            print(f"File {file_path} is not founded.")
-        except Exception as e:
-            print(f"Error while reading the file: {e}")
+    def post_page(self,campaign_id):
+        theme_id = self.db_worker.get_record(db.Campaign, id = campaign_id).theme_id
+        page = Page(
+        name=f"Landing Page for Campaign #{campaign_id}",
+        html= self.db_worker.get_record(db.Theme,id=theme_id).landing_page
+        )
+        self.api.pages.post(page)
 
-
-    def create_group(self,user_id):
-        name = f'Group {self.campaign_name}_{user_id}'
-        group = Group(name=name,targets = self.targets)
-        print(self.api_key)
-        group = self.api.groups.post(group)
-        self.groups.append(group)
+    def post_campaign(self,campaign_id,group_id:int ,template_id:int,smtp_id:int = 27,l_page_id:int = 31):
+        groups = self.api.groups.get(group_id=group_id)
         
-    def create_tamplate(self,user_id):
-        self.template = Template(name=f"Example Template for User {user_id}",
-                    subject="Phishing Test",
-                    html="<html><body><h1>This is a test</h1></body></html>")   
-        self.template = self.api.templates.post(self.template)
+        template = self.api.templates.get(template_id=template_id)
+        campaign_name = self.db_worker.get_record(db.Campaign,id=campaign_id).name
+        campaign = Campaign(
+            name=f'Example Campaign#{campaign_name}', groups=[groups], page=self.api.pages.get(page_id=l_page_id),
+                template = template, smtp=self.api.smtp.get(smtp_id=smtp_id))
+        self.api.campaigns.post(campaign) 
 
-    
-        
-    def create_Champaign(self,user_id):
+    def create_Champaign_for_user(self,user_id):
         campaign = Campaign(
             name=f'Example Campaign#{self.campaign_name}_{user_id}', groups=self.groups, page=self.page,
                 template=self.template, smtp=self.smtp)
-        self.campaign = self.api.campaigns.post(campaign) 
-        
-
-
-
-        
-
-
+        self.api.campaigns.post(campaign)  
