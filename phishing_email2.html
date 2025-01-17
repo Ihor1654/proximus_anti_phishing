@@ -1,64 +1,270 @@
+Tom
+cyclingcodecrusader
+Online
+
+Tom — 13/01/2025 09:43
+https://github.com/CyclingCodeCrusader
+GitHub
+CyclingCodeCrusader - Overview
+CyclingCodeCrusader has 3 repositories available. Follow their code on GitHub.
+Image
+Ihor — 14/01/2025 10:26
+I just get notification that you have privat API key in public repo
+Tom — 14/01/2025 10:27
+ok, indeed,I moved it and did not yet add it to .gitignore
+thanks for spotting
+Ihor — 14/01/2025 10:27
+So add file with your privat key to .gitignore on your local
+Ah
+I should have read begor i send)
+Tom — 14/01/2025 10:28
+haha, yes, it will be something to be aware of when we share project with proximus etc.
+Ihor — 14/01/2025 10:29
+But Git hub smart
+and i can see it
+if we have some security issues
+Tom — 14/01/2025 10:32
+I will remove the config.json in the branch online
+Ihor — 14/01/2025 10:32
+as you want)
+Tom — 14/01/2025 10:33
+well, I'm actually not sure want the best way is
+I have added config.json to .gitignore, and pushed, but the config.json remains online
+Ihor — 14/01/2025 10:38
+Both are good)
+Tom — 14/01/2025 10:38
+should be ok now
+Ihor — 14/01/2025 10:38
+Everything good, when its give you a necessary result)
+Git is smart)
+Smarter then I'm
+Ihor — 15/01/2025 12:37
+tom
+after tech talk we will work on it
+i just fixed the mess in Git
+Tom — 15/01/2025 13:12
+all good
+Ihor — 15/01/2025 17:01
+Tom 
+Tom — 15/01/2025 17:01
+hi
+Ihor — 15/01/2025 17:01
+I have last question for today
+Tom — 15/01/2025 17:01
+shoot
+Ihor — 15/01/2025 17:01
+Where we get landed page?
+Is this also generative
+Tom — 15/01/2025 17:02
+I think it comes from the vps
+Ihor — 15/01/2025 17:02
+No i mean template
+From where template comes?
+Tom — 15/01/2025 17:03
+I don't know actually. I assumed that they can be selected from some options in either gophish or vps
+Ihor — 15/01/2025 17:03
+okay, We'll find out tomorrow
+Tom — 15/01/2025 17:04
+yes, it would be good to try a run through of the whole pipeline
+Ihor — 15/01/2025 17:05
+Have a nice evening then, see you tomorrow)
+Tom — 15/01/2025 17:05
+thanks, same to you 🙂
+can you accept my pull request? I seem to have some conflicts, I'm probably doing something wrong
+Ihor — 15/01/2025 17:11
+i'll check
+Tom — 15/01/2025 17:11
+(first I'm going to run, I need more movement, I'm getting an IT-butt)
+Ihor — 15/01/2025 17:12
+ahaha
+I am just testing function for reading users from csv
+Ihor — 15/01/2025 17:24
+You've add file to root derectory
+They are exist in data/static
+use them from that directory
+I pulled everything
+Ihor — Yesterday at 21:22
+Tom, Hi
+Tom — Yesterday at 21:22
+hi Ihor
+Ihor — Yesterday at 21:22
+Can you send me your API_KEY from GenAI
+Tom — Yesterday at 21:23
+AIzaSyDoN-fUKmnKAGwDfsoRABrK0ySQOOaE5S4
+Ihor — Yesterday at 21:23
+Did you connect card to gogle cloud acount to get it ?
+Tom — Yesterday at 21:24
+no, not needed for this. I'm looking at Google Search and for that this key does not seem to work. But for the current code in our repo, it should work. Free tier, no card on file.
+Ihor — Yesterday at 21:32
+I finished class that generate template for specific user and save it to db
+Tom — Yesterday at 21:32
+cool !
+Ihor — Yesterday at 21:33
+Enough for today)
+Tom — Yesterday at 21:33
+exactly
+Ihor — Yesterday at 21:33
+Really dicsent code from you, it was easy to adapt
+Tom — Yesterday at 21:33
+thanks 🙂
+Ihor — Yesterday at 21:34
+I didn't touch the logic at all, just some variabels come now from other places
+Tom — Yesterday at 21:34
+ok, tomorrow first thing, I'll try to pull from main, but maybe best to do it together
+Ihor — Yesterday at 21:35
+I've just tested it and it is work, so I'll not disturb you today anymore.😁
+Ihor — Yesterday at 21:36
+Now after what we did in class you shouldn't get any troubles 
+Tom — Yesterday at 21:36
+fingers crossed 🙂
+have a good night 🙂
+Ihor — Yesterday at 21:36
+And you)
+Ihor — Today at 10:01
+just generated for user 2
 ```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Azure Services</title>
+Expand
+message.txt
+6 KB
+but i don't see mutch personilised info in this
+Tom — Today at 10:01
+ok cool, so that's the pipeline at work: from db > genAI > gophish?
+Ihor — Today at 10:02
+It's not ready yet
+Tom — Today at 10:02
+you are right, this type of campaign is very unpersonal, which is correct (the Azure emails are also like that)
+Ihor — Today at 10:03
+but is this  correct result ?
+I am now building on 
+Ihor
+ihor_1654
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Azure Email</title>
     <style>
-        body { font-family: sans-serif; margin: 0; padding: 0; }
-        .container { width: 100%; max-width: 600px; margin: 20px auto; padding: 20px; border: 1px solid #ddd; }
-        .header { text-align: left; margin-bottom: 20px; }
-        .logo { display: inline-block; vertical-align: middle; }
-        .logo img { height: 30px; }
-        h2 { color: #0078d4; }
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            width: 100%;
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .header {
+            background-color: #f0f0f0;
+            padding: 15px;
+            text-align: left;
+        }
+        .header img {
+            height: 20px;
+        }
+        .content {
+            padding: 20px;
+            line-height: 1.6;
+            color: #333;
+        }
         .button {
+            display: inline-block;
             background-color: #0078d4;
             color: white;
             padding: 10px 20px;
             text-decoration: none;
             border-radius: 5px;
+            margin-bottom: 15px;
+        }
+        .links {
+            margin-top: 20px;
+            text-align: left;
+        }
+        .links a {
+            margin-right: 15px;
+            color: #0078d4;
+            text-decoration: none;
+        }
+         .account-info {
+            background-color: #f0f0f0;
+            padding: 15px;
+            margin-top: 20px;
+        }
+        .footer {
+            padding: 20px;
+            text-align: left;
+            color: #777;
+            font-size: 0.8em;
+        }
+        .footer a {
+            color: #777;
+            text-decoration: underline;
+        }
+        .social-icons {
+            margin-top: 10px;
+        }
+        .social-icons a {
+            margin-right: 10px;
             display: inline-block;
         }
-        .links a { margin-right: 10px; color: #0078d4; text-decoration: none; }
-        .account-info { background-color: #f0f0f0; padding: 10px; margin-top: 20px; }
-        .social-icons { margin-top: 10px; }
-        .social-icons a { margin-right: 10px; display: inline-block; vertical-align: middle; }
-        .social-icons img { height: 20px; }
-        .footer { margin-top: 20px; font-size: 0.8em; color: #777; }
-         .footer a { color: #0078d4; text-decoration: none; }
+        .social-icons img {
+            height: 20px;
+        }
+         .logo-footer{
+          text-align: left;
+          padding-left: 20px;
+          padding-bottom: 20px;
+        }
+         .logo-footer img {
+           height: 20px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <a href="https://azure.microsoft.com/" class="logo"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Microsoft_Azure_Logo.svg/2560px-Microsoft_Azure_Logo.svg.png" alt="Microsoft Azure Logo"></a>
+            <a href="https://azure.microsoft.com/"><img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Microsoft_Azure_logo.svg" alt="Microsoft Azure Logo"></a>
         </div>
-        <h2>Keep using Azure services beyond 30 days</h2>
-        <p>Now that you've started building with Azure services, keep your project going. To continue using your services without interruption after you spend your free credit or 30 days—whichever comes first—move to pay-as-you-go pricing now. Enjoy continued free access to many popular Azure services and only pay for what you use in other services above your monthly free amounts.</p>
-        <a href="https://example.com/manage-storage" class="button">Move to pay as you go</a>
-        <p>If you have any remaining credit, you can continue to use it until 30 days from when you created your Azure free account. <a href="https://example.com/manage-storage">Check your credit and usage</a> to estimate what your potential costs will be after you move to pay-as-you-go pricing.</p>
-        <div class="links">
+        <div class="content">
+            <h2>Keep using Azure services beyond 30 days</h2>
+            <p>Now that you've started building with Azure services, keep your project going. To continue using your services without interruption after you spend your free credit or 30 days—whichever comes first—move to pay-as-you-go pricing now. Enjoy continued free access to many popular Azure services and only pay for what you use in other services above your monthly free amounts.</p>
+            <a href="https://portal.azure.com/" class="button">Move to pay as you go</a>
+            <p>If you have any remaining credit, you can continue to use it until 30 days from when you created your Azure free account. <a href="https://portal.azure.com/" >Check your credit and usage</a> to estimate what your potential costs will be after you move to pay-as-you-go pricing.</p>
+        </div>
+          <div class="links">
             <a href="https://portal.azure.com/">Azure Portal</a>
-            <a href="https://docs.microsoft.com/azure/">Documentation</a>
-            <a href="https://azure.microsoft.com/training/">Training</a>
-            <a href="https://azure.microsoft.com/support/">Support</a>
+            <a href="https://learn.microsoft.com/en-us/azure/">Documentation</a>
+            <a href="https://learn.microsoft.com/en-us/training/">Training</a>
+             <a href="https://azure.microsoft.com/en-us/support/">Support</a>
         </div>
-        <div class="account-info">
+         <div class="account-info">
             <p><strong>Account information</strong></p>
-            <p><strong>Subscription ID:</strong> f0ba9e8d-9f1d-40e1-a7f2-d03d6eb6af01</p>
-            <div class="social-icons">
-                <a href="https://www.facebook.com/microsoftazure"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/2021_Facebook_icon.svg/2048px-2021_Facebook_icon.svg.png" alt="Facebook"></a>
-                <a href="https://twitter.com/Azure"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Logo_of_Twitter.svg/512px-Logo_of_Twitter.svg.png" alt="Twitter"></a>
-                <a href="https://www.youtube.com/user/windowsazure"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/YouTube_full-color_icon_%282017%29.svg/2560px-YouTube_full-color_icon_%282017%29.svg.png" alt="YouTube"></a>
-                 <a href="https://www.linkedin.com/showcase/microsoft-azure/"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/LinkedIn_logo_initials.png/800px-LinkedIn_logo_initials.png" alt="LinkedIn"></a>
-            </div>
+            <p><strong>Subscription ID:</strong> 8a7b2c3d-4e5f-6a7b-8c9d-0e1f2a3b4c5d</p>
+        </div>
+         <div class="social-icons">
+             <a href="https://www.facebook.com/microsoftazure"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/2021_Facebook_icon.svg/2048px-2021_Facebook_icon.svg.png" alt="Facebook"></a>
+             <a href="https://twitter.com/Azure"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Logo_of_Twitter.svg/512px-Logo_of_Twitter.svg.png" alt="Twitter"></a>
+             <a href="https://www.youtube.com/user/windowsazure"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/YouTube_full-color_icon_%282017%29.svg/2560px-YouTube_full-color_icon_%282017%29.svg.png" alt="YouTube"></a>
+             <a href="https://www.linkedin.com/showcase/microsoft-azure"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/LinkedIn_logo_initials.png/768px-LinkedIn_logo_initials.png" alt="LinkedIn"></a>
         </div>
         <div class="footer">
             <p>This email was sent from an unmonitored inbox.</p>
             <p><a href="#">Unsubscribe</a> | <a href="#">Privacy Statement</a></p>
             <p>Microsoft Corporation, One Microsoft Way, Redmond, WA 98052</p>
-            <a href="https://www.microsoft.com/" class="logo"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Microsoft_logo_%282012%29.svg/2560px-Microsoft_logo_%282012%29.svg.png" alt="Microsoft Logo"></a>
+        </div>
+        <div class="logo-footer">
+           <a href="https://www.microsoft.com/"><img src="https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg" alt="Microsoft Logo"></a>
         </div>
     </div>
 </body>
