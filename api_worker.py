@@ -7,6 +7,7 @@ import os
 
 class Api_Worker:
     def __init__(self):
+        load_dotenv()
         self.api_key = os.getenv('API_KEY')
         self.api = Gophish(self.api_key,host="https://127.0.0.1:3333",verify = False)
         self.targets = []
@@ -17,15 +18,15 @@ class Api_Worker:
         self.template = None   
         self.Campaign_counter = 0  
         self.template_counter = 0
-        self.id = int(input('id')) 
+        self.id = int(input('id: ')) 
         self.app_pass = os.getenv('APP_PASS')
         self.mail = os.getenv('EMAIL')
         
 
     def manual_create_user(self):
-        first_name = input('first_name:')
-        last_name = input("last_name:")
-        email = input('email')
+        first_name = input('first_name: ')
+        last_name = input("last_name: ")
+        email = input('email: ')
         
         return User(first_name=first_name,last_name=last_name,email=email)
     
@@ -36,7 +37,7 @@ class Api_Worker:
         # print(len(self.targets))
 
     def manualy_create_group(self):
-        name = input('Group name:')
+        name = input('Group name: ')
         group = Group(name=name,targets = self.targets)
         print(self.api_key)
         group = self.api.groups.post(group)
