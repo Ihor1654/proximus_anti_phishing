@@ -2,6 +2,8 @@ import os
 import google.generativeai as genai
 # pip install -q -U google-generativeai
 
+# https://ai.google.dev/gemini-api/docs/quickstart?lang=python
+
 from PIL import Image
 # pip install -q -U pillow
 

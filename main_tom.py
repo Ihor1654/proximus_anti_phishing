@@ -29,7 +29,7 @@ phishing_themes = [
         "The output is an html formatted email. The email mimicks the image in the uploaded file. The output contains the logo found in the uploaded image. The logo is not retrieved from the website https://upload.wikimedia.org/wikipedia/commons.",
     "Grounding Text":"data/static/MS_Azure_original_email.html",
     "Generation Config": {
-        "temperature": 0.7,
+        "temperature": 0.2,
         "top_p": 0.95,
         "top_k": 64,
         "max_output_tokens": 8192,
