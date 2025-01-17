@@ -6,18 +6,25 @@ from dotenv import load_dotenv
 import os 
 import csv
 import urllib3
+
 from template_creator import TemplateCreator
+
 import db_worker as db
 load_dotenv()
 
 
+
+
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 
 
 class Api_Worker:
+
     def __init__(self,):
+
         self.api_key = os.getenv('API_KEY')
         self.api = Gophish(self.api_key,host="https://127.0.0.1:3333",verify = False)
         self.app_pass = os.getenv('APP_PASS')
@@ -41,10 +48,11 @@ class Api_Worker:
     def get_tamplate_by_id(self,template_id):
         template = self.api.templates.get(template_id=template_id)
         return template
-    
+
     def delete_template_by_id(self,template_ids:list):
         for template_id in template_ids:
             self.api.templates.delete(template_id)
+
 
     def post_smtp_for_campaign(self,campaing_id):
         smtp = SMTP(
