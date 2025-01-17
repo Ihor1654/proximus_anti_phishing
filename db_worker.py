@@ -134,17 +134,13 @@ class DBWorker:
     
     @db_operation("add")
     def add_user_to_group(self, session, user_id, group_id):
-        # Получаем пользователя по user_id
         user = session.query(User).filter_by(id=user_id).first()
 
-        # Получаем группу по group_id
         group = session.query(Group).filter_by(group_id=group_id).first()
 
         if user and group:
-            # Добавляем пользователя в группу
             group.users.append(user)
 
-            # Возвращаем обновленную группу
             return group
         else:
             raise ValueError("User or Group not found")
