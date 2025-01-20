@@ -36,7 +36,7 @@ team_name="CyberSecurity"
 prompt_body = f'''Write an email from {sender_name} to {name} {surname} in the {team_name} team on the following theme: {phishing_reason}.
             He will have to click on this link : {fake_link}. The event will take place on {datetime.today() + relativedelta(months=+2)} at 6pm.  The location will still be a surprise. Only write the body of this email.'''
              
-output_composition = "The output is an html formatted email. The email mimicks the font of proximus. The output contains the logo found in the uploaded image. The logo is retrieved from the website https://upload.wikimedia.org/wikipedia/commons/a/aa/Proximus_logo1.png.",
+output_composition = "The output is an html formatted email. The email mimicks the font and color of proximus, which is purple. The output contains the logo found in the uploaded image. The logo is retrieved from the website https://upload.wikimedia.org/wikipedia/commons/a/aa/Proximus_logo1.png.",
 
 # Combine the grounding text and the prompt body to make the fully engineered prompt
 prompt_input_text = f"Prompt:\n{prompt_body}/n---/nOutput Composition:/n{output_composition}"
